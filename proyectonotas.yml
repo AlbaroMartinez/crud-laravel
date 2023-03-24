@@ -1,0 +1,36 @@
+version: '2'
+# 
+services:
+  db:
+    image: postgres:15.2-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: '1234'
+      PGDATA: /var/lib/postgresql/data/pgdata
+    expose:
+      - '5432'
+    # volumes:
+      # - ./academic_db_20230214.sql:/docker-entrypoint-initdb.d/academic_db.sql
+      # - ./data:/var/lib/postgresql/data
+  # 
+  app:
+    image: ajmc5890/bitnami-laravel:9
+    restart: unless-stopped
+    ports:
+      - '8000:8000'
+    environment:
+      - DB_CONNECTION=pgsql
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_DATABASE=postgres
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=1234
+    volumes:
+      - './crud_laravel:/app'
+      #- '/home/ajmc/PasantiaUP/migracion-upa:/app'
+    # 
+  adminer:
+    image: adminer:4.8.1
+    ports:
+      - 8080:8080
+  
