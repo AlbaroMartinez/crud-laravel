@@ -10,21 +10,34 @@ lista de tareas
 
 @section('content')
 <div class="d-flex justify-content-center pt-5">
-    <form>
+    <form method="POST">
+        @csrf
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          <label for="exampleInputEmail1" class="form-label">Name</label>
+          <input type="text" name="name" value="{{@old('name')}}" class="form-control" id="exampleInputEmail1"  placeholder="name task">
+          @error('name')
+            <div id="emailHelp" class="form-text">{{ $message }}</div>
+          @enderror
         </div>
         <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1">
+          <label for="exampleInputPassword1" class="form-label">Description</label>
+          <textarea name="description" cols="2" class="form-control" id="exampleInputPassword1" placeholder="description to tasks">{{@old('description')}}</textarea>
+          @error('description')
+            <div id="emailHelp" class="form-text">{{ $message }}</div>
+          @enderror
         </div>
-        <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Date</label>
+            <input value="{{@old('date')}}" type="date" name="date" class="form-control" id="date">
+            @error('date')
+                <div id="emailHelp" class="form-text">{{ $message }}</div>
+            @enderror
+          </div>
+
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Add</button>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
       </form>
 </div>
 @endsection
+
