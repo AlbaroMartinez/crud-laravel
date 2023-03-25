@@ -67,9 +67,13 @@ lista de tareas
             <td>
                 <button class="btn {{$task->status ? 'bg-success' : 'bg-danger'}}">{{$task->status ? 'Realizado': 'No realizado'}}</button>
             </td>
-            <td>
+            <td class="d-flex">
                 <a href="{{route('tasks.edit', $task->id)}}" class="btn btn-warning">Edit</a>
-                <button class="btn btn-danger">Delete</button>
+                <form method="POST" action="{{route('tasks.destroy', $task->id)}}">
+                    @method('DELETE')
+                    @csrf
+                    <button class="btn btn-danger">Delete</button>
+                </form>
             </td>
         </tr>
         @endforeach
