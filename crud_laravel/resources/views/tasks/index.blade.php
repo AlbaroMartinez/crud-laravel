@@ -9,8 +9,9 @@ lista de tareas
 @endsection
 
 @section('content')
-<div class="d-flex justify-content-center pt-5">
+<div class="d-flex justify-content-center pt-1">
     <form method="POST">
+        <h1 class="h3 text-center">Add Taks</h1>
         @csrf
         @if (session()->has('success'))
         <div class="alert alert-info" role="alert">
@@ -45,7 +46,10 @@ lista de tareas
       </form>
 
 </div>
-<div class="container">
+<div class="container pt-3  ">
+    <h1 class="h2 text-center">List to Tasks</h1>
+</div>
+<div class="container ">
   <table class="table">
     <thead>
       <tr>
