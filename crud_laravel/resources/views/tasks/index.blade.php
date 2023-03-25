@@ -43,6 +43,38 @@ lista de tareas
             <button type="submit" class="btn btn-primary">Add</button>
         </div>
       </form>
+
+</div>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Date</th>
+        <th scope="col">Status</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+        @foreach ($tasks as $key => $task)
+        <tr>
+            <th scope="row">{{ $key+1 }}</th>
+            <td>{{$task->name}}</td>
+            <td>{{$task->description}}</td>
+            <td>{{$task->date}}</td>
+            <td>
+                <button class="btn {{$task->status ? 'bg-success' : 'bg-danger'}}">{{$task->status ? 'Realizado': 'No realizado'}}</button>
+            </td>
+            <td>
+                <a href="{{route('tasks.edit', $task->id)}}" class="btn btn-warning">Edit</a>
+                <button class="btn btn-danger">Delete</button>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+  </table>
 </div>
 @endsection
 

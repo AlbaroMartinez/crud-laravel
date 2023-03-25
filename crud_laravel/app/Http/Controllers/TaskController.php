@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Task\StoreRequest;
+use App\Http\Requests\Task\UpdateRequest;
 use App\Models\Task;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class TaskController extends Controller
      */
     public function index()
     {
-        return view('tasks.index');
+        $tasks = Task::all();
+        return view('tasks.index', compact('tasks'));
     }
 
     /**
@@ -66,7 +68,9 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        //
+        return view('tasks.edit', [
+            'task'=> $task
+        ]);
     }
 
     /**
@@ -76,9 +80,11 @@ class TaskController extends Controller
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Task $task)
+    public function update(UpdateRequest $request, Task $task)
     {
-        //
+        $data = $request->only('name', 'description', 'date', 'status');
+        $task->update($data);
+        return redirect()->back()->with('success', 'Taks updates');
     }
 
     /**
