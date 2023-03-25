@@ -36,7 +36,15 @@ class TaskController extends Controller
      */
     public function store(StoreRequest  $request)
     {
-        dd($request->all());
+        // Task::create([
+            //     'name' => $request->name,
+            //     'description' => $request->description,
+            //     'date' => $request->date
+            // ]);
+        // Task::create($request->all());
+        $data = $request->only('name', 'description', 'date', 'status');
+        Task::create($data);
+        return redirect()->back()->with('success','tarea creada correctamente');
     }
 
     /**

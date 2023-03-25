@@ -12,6 +12,11 @@ lista de tareas
 <div class="d-flex justify-content-center pt-5">
     <form method="POST">
         @csrf
+        @if (session()->has('success'))
+        <div class="alert alert-info" role="alert">
+            {{session()->get('success')}}
+          </div>
+        @endif
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Name</label>
           <input type="text" name="name" value="{{@old('name')}}" class="form-control" id="exampleInputEmail1"  placeholder="name task">
